@@ -11,7 +11,6 @@ AppView = require('./views/app-view.js');
 
 
 $(document).ready(function() {
-	require('./module/init.js');
 	require('./module/base.js');
 	require("./models/todo.js");
 	require("./collections/todo.js");
