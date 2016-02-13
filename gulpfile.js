@@ -37,7 +37,10 @@ gulp.task( "styles", function() {
 	];
 
 	var out = gulp.src('src/style/main.scss')
-		.pipe( $.sourcemaps.init() )
+	//	.pipe( $.sourcemaps.init() )
+		.pipe( $.cssGlobbing({
+			extensions: ['.css','.scss']
+		}))
 		.pipe( $.sass({
 			style: 'expanded',
 			includePaths: paths
