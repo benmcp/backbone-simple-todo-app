@@ -5,6 +5,7 @@ var ENTER_KEY = 13;
 var ESC_KEY = 27;
 
 AppView = require('./views/app-view.js');
+
  var Backbone = require('backbone');
  Backbone.$ = $;
 
@@ -19,5 +20,6 @@ $(document).ready(function() {
 
 	new AppView();
 	require("./routers/router.js");
+
 });
 

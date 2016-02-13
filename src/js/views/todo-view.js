@@ -2,6 +2,7 @@
 
  var $ = require('jquery');
  var Backbone = require('backbone');
+ var Todos = require('../collections/todo.js');
  Backbone.$ = $;
 
 
@@ -62,8 +63,8 @@ module.exports = Backbone.View.extend({
 
 	isHidden: function () {
 		return this.model.get('completed') ?
-			app.TodoFilter === 'active' :
-			app.TodoFilter === 'completed';
+			Todos.TodoFilter === 'active' :
+			Todos.TodoFilter === 'completed';
 	},
 
 	// Toggle the `"completed"` state of the model.

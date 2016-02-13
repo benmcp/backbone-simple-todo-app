@@ -10,9 +10,9 @@ var Todo = require('../models/todo.js');
 
 // The collection of todos is backed by *localStorage* instead of a remote
 // server.
-module.exports.Todos = new Backbone.Collection.extend({
+module.exports = Backbone.Collection.extend({
 	// Reference to this collection's model.
-	model: module.exports.Todo,
+	model: Todo,
 
 	// Save all of the todo items under this example's namespace.
 	localStorage: new Backbone.LocalStorage('todos-backbone'),

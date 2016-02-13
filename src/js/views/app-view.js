@@ -10,6 +10,8 @@ var ESC_KEY = 27;
  var TodoView = require('../views/todo-view.js');
  Backbone.$ = $;
 
+ console.log(Todos);
+
 
 // Our overall **AppView** is the top-level piece of UI.
 module.exports = Backbone.View.extend({
@@ -32,6 +34,9 @@ module.exports = Backbone.View.extend({
 	// collection, when items are added or changed. Kick things off by
 	// loading any preexisting todos that might be saved in *localStorage*.
 	initialize: function () {
+
+		Todos = new Todos();
+
 		this.allCheckbox = this.$('.toggle-all')[0];
 		this.$input = this.$('.new-todo');
 		this.$footer = this.$('.footer');
@@ -44,10 +49,13 @@ module.exports = Backbone.View.extend({
 		this.listenTo(Todos, 'filter', this.filterAll);
 		this.listenTo(Todos, 'all', _.debounce(this.render, 0));
 
+
 		// Suppresses 'add' events with {reset: true} and prevents the app view
 		// from being re-rendered for every model. Only renders when the 'reset'
 		// event is triggered at the end of the fetch.
-		//Todos.fetch({reset: true});
+		console.log(Todos);
+		Todos.fetch({reset: true});
+
 	},
 
 	// Re-rendering the App just means refreshing the statistics -- the rest
@@ -67,7 +75,7 @@ module.exports = Backbone.View.extend({
 
 			this.$('.filters li a')
 				.removeClass('selected')
-				.filter('[href="#/' + (app.TodoFilter || '') + '"]')
+				.filter('[href="#/' + (Todos.TodoFilter || '') + '"]')
 				.addClass('selected');
 		} else {
 			this.$main.hide();
@@ -100,9 +108,10 @@ module.exports = Backbone.View.extend({
 
 	// Generate the attributes for a new Todo item.
 	newAttributes: function () {
+		console.log(Todos);
 		return {
 			title: this.$input.val().trim(),
-			order: Todos.Todos.prototype.nextOrder(),
+			order: Todos.nextOrder(),
 			completed: false
 		};
 	},
