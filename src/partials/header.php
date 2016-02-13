@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, maximum-scale=1">
 		<title>Backbone - Simple Application</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link rel="stylesheet"  href="css/main.css" type="text/css" media="all">
 	</head>
 	<body >
 		<div class="content">
