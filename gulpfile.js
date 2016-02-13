@@ -131,6 +131,9 @@ gulp.task( "javascript", ["jshint"], function() {
 gulp.task( "jsconcat", function() {
 	return gulp.src([
 			"bower_components/jquery/dist/jquery.min.js",
+			"bower_components/underscore/underscore-min.js",
+			"bower_components/backbone/backbone-min.js",
+			"bower_components/backbone.localStorage/backbone.localStorage-min.js",
 			"src/js/vendor/*.js"
 		])
 		.pipe( $.concat( "vendor.min.js" ) )
@@ -149,6 +152,7 @@ gulp.task( "watch", ["images",  "styles", "javascript", "copy", "jsconcat"], fun
 
 	/** Watch for JS changes */
 	gulp.watch("src/js/*.js", ["javascript"]);
+	gulp.watch("src/js/**/*.js", ["javascript"]);
 
 	/** Watch for Image changes */
 	gulp.watch("src/img/**/*.{jpg,png,svg,webp}", ["images"]);

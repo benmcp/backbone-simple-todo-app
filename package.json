@@ -4,14 +4,34 @@
   "private": true,
   "version": "0.0.1",
   "author": "ben",
-  "dependencies": {},
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browser": {
+    "backbone.localStorage" : "bower_components/backbone.localStorage/backbone.localStorage-min.js",
+    "backbone"              : "bower_components/backbone/backbone-min.js",
+    "underscore"            : "bower_components/underscore/underscore-min.js",
+    "jquery"                : "bower_components/jquery/dist/jquery.min.js"
+  },
+  "browserify-shim": {
+    "jquery"              : "global:jQuery",
+    "backbone"            : "global:Backbone",
+    "underscore"          : "global:_",
+    "backbone.localStorage" : "backbone.localStorage"
+  },
+  "dependencies": {
+    "backbone": "^1.2.3",
+    "browserify-shim": "^3.8.12",
+    "jquery": "^2.2.0"
+  },
   "devDependencies": {
     "browserify": "^11.0.1",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.1",
     "gulp-concat": "^2.6.0",
     "gulp-css-globbing": "^0.1.8",
-    "gulp": "^3.9.0",
     "gulp-jshint": "^1.11.2",
     "gulp-livereload": "^3.8.0",
     "gulp-load-plugins": "^1.0.0-rc.1",
