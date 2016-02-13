@@ -10,8 +10,6 @@ var ESC_KEY = 27;
  var TodoView = require('../views/todo-view.js');
  Backbone.$ = $;
 
- console.log(Todos);
-
 
 // Our overall **AppView** is the top-level piece of UI.
 module.exports = Backbone.View.extend({
@@ -53,7 +51,6 @@ module.exports = Backbone.View.extend({
 		// Suppresses 'add' events with {reset: true} and prevents the app view
 		// from being re-rendered for every model. Only renders when the 'reset'
 		// event is triggered at the end of the fetch.
-		console.log(Todos);
 		Todos.fetch({reset: true});
 
 	},
@@ -108,7 +105,6 @@ module.exports = Backbone.View.extend({
 
 	// Generate the attributes for a new Todo item.
 	newAttributes: function () {
-		console.log(Todos);
 		return {
 			title: this.$input.val().trim(),
 			order: Todos.nextOrder(),
