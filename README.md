@@ -1,12 +1,11 @@
-# Simple base
+# backbone-simple-todo-app
 
-Basically I've been doing various variants of default product setups, this is an attempt to unify (mainly the front end) to a convention that seems to be used by others.
+Haven't touched backbone in a long time. Thought I'd play around with it again.
 
-NB: was meant to grunt, but reverted to gulp due to soul destroying bug.
 
 ## To set up
 
-npm insatll
+npm insatll (there are a few packages... soz)
 
 bower install
 
