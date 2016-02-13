@@ -23,10 +23,6 @@ var dist = "dist/";
 
 function styles(){
 	var paths = [
-		'bower_components/normalize-scss/',
-		'bower_components/components-font-awesome/scss/',
-		'bower_components/bourbon/app/assets/stylesheets/',
-		'bower_components/neat/app/assets/stylesheets/',
 		'font-awesome/css/font-awesome.min.css'
 	];
 

@@ -41,8 +41,6 @@
     "gulp-imagemin": "^2.3.0",
     "gulp-cache": "^0.3.0",
     "jshint-stylish": "^2.0.1",
-    "node-bourbon": "^4.2.3",
-    "node-neat": "^1.7.2",
     "rimraf": "^2.4.3",
     "run-sequence": "^1.1.2",
     "vinyl-buffer": "^1.0.0",
