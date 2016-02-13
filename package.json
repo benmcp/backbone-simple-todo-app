@@ -50,6 +50,6 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "deploy": "gulp build && gulp deploy"
+    "build": "gulp build"
   }
 }

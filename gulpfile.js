@@ -9,7 +9,6 @@ var browserify  = require("browserify");
 var vsource     = require("vinyl-source-stream");
 var vbuffer     = require("vinyl-buffer");
 var runSequence = require("run-sequence");
-var pngquant    = require('imagemin-pngquant');
 
 var envProd     = false;
 
@@ -22,18 +21,13 @@ var dist = "dist/";
 ***/
 
 function styles(){
-	var paths = [
-		'font-awesome/css/font-awesome.min.css'
-	];
-
+	
 	var out = gulp.src('src/style/main.scss')
-	//	.pipe( $.sourcemaps.init() )
 		.pipe( $.cssGlobbing({
 			extensions: ['.css','.scss']
 		}))
 		.pipe( $.sass({
-			style: 'expanded',
-			includePaths: paths
+			style: 'expanded'
 		}))
 		.on('error', $.sass.logError)
 		.on('error', function(e) {
@@ -52,29 +46,6 @@ function styles(){
 	}
 
 	return out.pipe( gulp.dest(dist + 'css') );
-};
-
-function copy(){
-	return gulp.src([
-		"src/fonts/**/*.{woff,woff2,ttf,otf,eot,svg}",
-		"src/**/*.php",
-		"src/**/*.css"
-	], {
-		base: "src"
-	})
-	.pipe( gulp.dest( dist ) );
-};
-
-function images(){
-	return gulp.src('src/img/**/*.{jpg,png,gif,svg}')
-		.pipe($.cache(
-			$.imagemin({
-				progressive: true,
-				svgoPlugins: [{removeViewBox: true}],
-				use: [pngquant()]
-			})
-		))
-		.pipe(gulp.dest(dist + 'img'));
 };
 
 function jshint(){
@@ -133,15 +104,10 @@ function watch(){
 	/** Watch for SASS changes */
 	gulp.watch("src/style/**/*.scss", ["styles"]);
 
-	/** Watch for PHP changes */
-	gulp.watch("src/**/*.php", ["copy"]);
-
 	/** Watch for JS changes */
 	gulp.watch("src/js/*.js", ["javascript"]);
 	gulp.watch("src/js/**/*.js", ["javascript"]);
 
-	/** Watch for Image changes */
-	gulp.watch("src/img/**/*.{jpg,png,svg,webp}", ["images"]);
 
 	gulp.watch([
 		dist + "**/*.php",
@@ -178,16 +144,6 @@ gulp.task( "styles", function() {
 	return styles();
 });
 
-/** Copy */
-gulp.task( "copy",  function() {
-	return copy();
-});
-
-
-gulp.task("images", function() {
-	return images();
-});
-
 /** JSHint */
 gulp.task( "jshint", function () {
 	return jshint();
@@ -204,9 +160,9 @@ gulp.task( "jsconcat", function() {
 });
 
 /** Livereload */
-gulp.task( "watch", ["images",  "styles", "javascript", "copy", "jsconcat"], function() {
+gulp.task( "watch", [ "styles", "javascript", "jsconcat"], function() {
 	return watch();
 });
 
 /** Build */
-gulp.task( "build", ["clean","images","styles","copy", "javascript","jsconcat"], function() {} );
+gulp.task( "build", ["clean","styles","javascript","jsconcat"], function() {} );
