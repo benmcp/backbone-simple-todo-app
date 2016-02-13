@@ -15,19 +15,13 @@ var envProd     = false;
 
 var dist = "dist/";
 
-/** Clean */
-gulp.task("clean", function() {
-	rimraf.sync(".tmp");
-	rimraf.sync(dist);
-});
+/***
 
-/** Clear Cache */
-gulp.task("cacheclear", function() {
-	$.cache.clearAll();
-});
+	Gulp Functions.
 
-/** Stylesheets */
-gulp.task( "styles", function() {
+***/
+
+function styles(){
 	var paths = [
 		'bower_components/normalize-scss/',
 		'bower_components/components-font-awesome/scss/',
@@ -62,11 +56,9 @@ gulp.task( "styles", function() {
 	}
 
 	return out.pipe( gulp.dest(dist + 'css') );
-});
+};
 
-
-/** Copy */
-gulp.task( "copy",  function() {
+function copy(){
 	return gulp.src([
 		"src/fonts/**/*.{woff,woff2,ttf,otf,eot,svg}",
 		"src/**/*.php",
@@ -75,9 +67,9 @@ gulp.task( "copy",  function() {
 		base: "src"
 	})
 	.pipe( gulp.dest( dist ) );
-});
+};
 
-gulp.task("images", function() {
+function images(){
 	return gulp.src('src/img/**/*.{jpg,png,gif,svg}')
 		.pipe($.cache(
 			$.imagemin({
@@ -87,10 +79,9 @@ gulp.task("images", function() {
 			})
 		))
 		.pipe(gulp.dest(dist + 'img'));
-});
+};
 
-/** JSHint */
-gulp.task( "jshint", function () {
+function jshint(){
 	return gulp.src("src/js/*.js")
 		.pipe( $.jshint() )
 		.pipe( $.jshint.reporter( "jshint-stylish" ) )
@@ -98,10 +89,10 @@ gulp.task( "jshint", function () {
 		.on('error', function(e) {
 			$.notify().write(e);
 		});
-});
+}
 
-/** Compile Javascript */
-gulp.task( "javascript", ["jshint"], function() {
+function javascript(){
+
 	var b = browserify({
 		entries: "./src/js/main.js",
 		debug: true
@@ -125,10 +116,9 @@ gulp.task( "javascript", ["jshint"], function() {
    	return out.on("error", function(e) {
    		$.notify().write(e);
    	}).pipe(gulp.dest(dist + "js"));
-});
+};
 
-/** Concatenate JS*/
-gulp.task( "jsconcat", function() {
+function jsconcat(){
 	return gulp.src([
 			"bower_components/jquery/dist/jquery.min.js",
 			"bower_components/underscore/underscore-min.js",
@@ -138,10 +128,10 @@ gulp.task( "jsconcat", function() {
 		])
 		.pipe( $.concat( "vendor.min.js" ) )
 		.pipe( gulp.dest( dist + "js" ) );
-});
 
-/** Livereload */
-gulp.task( "watch", ["images",  "styles", "javascript", "copy", "jsconcat"], function() {
+}
+
+function watch(){
 	$.livereload.listen();
 
 	/** Watch for SASS changes */
@@ -165,6 +155,61 @@ gulp.task( "watch", ["images",  "styles", "javascript", "copy", "jsconcat"], fun
 	]).on( "change", function( file ) {
 		$.livereload.changed(file.path);
 	});
+};
+
+
+
+/***
+
+	Gulp Tasks
+
+***/
+
+
+/** Clean */
+gulp.task("clean", function() {
+	rimraf.sync(".tmp");
+	rimraf.sync(dist);
+});
+
+/** Clear Cache */
+gulp.task("cacheclear", function() {
+	$.cache.clearAll();
+});
+
+/** Stylesheets */
+gulp.task( "styles", function() {
+	return styles();
+});
+
+/** Copy */
+gulp.task( "copy",  function() {
+	return copy();
+});
+
+
+gulp.task("images", function() {
+	return images();
+});
+
+/** JSHint */
+gulp.task( "jshint", function () {
+	return jshint();
+});
+
+/** Compile Javascript */
+gulp.task( "javascript", ["jshint"], function() {
+	return javascript();
+});
+
+/** Concatenate JS*/
+gulp.task( "jsconcat", function() {
+	return jsconcat();
+});
+
+/** Livereload */
+gulp.task( "watch", ["images",  "styles", "javascript", "copy", "jsconcat"], function() {
+	return watch();
 });
 
 /** Build */
