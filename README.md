@@ -1,5 +1,7 @@
 # backbone-simple-todo-app
 
+WIP - implementation of browserify causes an error in backbone mv fn.
+
 Haven't touched backbone in a long time. Thought I'd play around with it again.
 
 
