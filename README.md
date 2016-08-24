@@ -11,6 +11,6 @@ Haven't touched backbone in a long time. Thought I'd play around with it again.
 
 `gulp build`
 
-cd dist
+`cd dist`
 
-php -S localhost:1234
+`php -S localhost:1234`
