@@ -24,7 +24,7 @@
   "dependencies": {
     "backbone": "^1.2.3",
     "browserify-shim": "^3.8.12",
-    "jquery": "^2.2.0"
+    "jquery": "^3.0.0"
   },
   "devDependencies": {
     "browserify": "^11.0.1",
